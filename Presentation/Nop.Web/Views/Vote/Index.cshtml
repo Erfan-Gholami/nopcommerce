@@ -1,0 +1,185 @@
+﻿@using Nop.Web.Models.Vote;
+@model VoteItemModel  // Assuming you have a CustomerModel with the necessary properties
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Vote").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-Vote-page");
+}
+
+<h2>فرم نظرسنجی</h2>
+
+<form asp-action="VoteSent" method="post" class="vote-form">
+    <div class="form-group">
+        <label asp-for="Name">@T("vote.instore.lable.name")</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Birthday">@T("vote.instore.lable.Birthday")</label>
+        <input asp-for="Birthday" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Mobile">@T("vote.instore.lable.Mobile")</label>
+        <input asp-for="Mobile" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email">@T("vote.instore.lable.Email")</label>
+        <input asp-for="Email" type="email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Tahsilat">@T("vote.instore.lable.Tahsilat")</label>
+        <select asp-for="Tahsilat" class="form-control">
+            <!-- Add options for Tahsilat -->
+            <option value="زیر دیپلم">@T("vote.instore.educationlevel.prediploma")
+            </option>
+            <option value="دیپلم">@T("vote.instore.educationlevel.diploma")</option>
+            <option value="فوق دیپلم">@T("vote.instore.educationlevel.post-diploma")</option>
+            <option value="لیسانس">@T("vote.instore.educationlevel.bachelor")</option>
+            <option value="فوق لیسانس">@T("vote.instore.educationlevel.master")</option>
+            <option value="دکترا">@T("vote.instore.educationlevel.doctorate")</option>
+
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>@T("vote.instore.lable.FoodQuality")</label>
+        <div class="radio-options">
+            <input type="radio" id="bad" name="FoodQuality" value="بد">
+            <label for="bad">@T("reviews.fields.rating.bad")</label>
+            <input type="radio" id="normal" name="FoodQuality" value="معمولی">
+            <label for="normal">@T("vote.instore.rate.typical")</label>
+            <input type="radio" id="good" name="FoodQuality" value="خوب">
+            <label for="good">@T("reviews.fields.rating.good")</label>
+            <input type="radio" id="perfect" name="FoodQuality" value="عالی">
+            <label for="perfect">@T("reviews.fields.rating.excellent")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>@T("vote.instore.lable.StaffLook")</label>
+        <div class="radio-options">
+            <input type="radio" id="staffBad" name="StaffLook" value="بد">
+            <label for="staffBad">@T("reviews.fields.rating.bad")</label>
+            <input type="radio" id="staffGood" name="StaffLook" value="خوب">
+            <label for="staffGood">@T("reviews.fields.rating.good")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>@T("vote.instore.lable.EnviromentPrettiness")</label>
+        <div class="radio-options">
+            <input type="radio" id="envBad" name="EnviromentPrettiness" value="بد">
+            <label for="envBad">@T("reviews.fields.rating.bad")</label>
+            <input type="radio" id="envGood" name="EnviromentPrettiness" value="خوب">
+            <label for="envGood">@T("reviews.fields.rating.good")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="WhoIsGuest">@T("vote.instore.lable.WhoIsGuest")</label>
+        <input asp-for="WhoIsGuest" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>@T("vote.instore.lable.Critisize")</label>
+        <textarea asp-for="Critisize" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>@T("vote.instore.lable.HowFindUs")</label>
+        <input asp-for="HowFindUs" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>@T("vote.instore.lable.DrchiaKnowledge")</label>
+    <div class="radio-options">
+        <input type="radio" id="knowledgeYes" name="DrchiaKnowledge" value="بله">
+            <label for="knowledgeYes">@T("admin.common.yes")</label>
+        <input type="radio" id="knowledgeNo" name="DrchiaKnowledge" value="خیر">
+            <label for="knowledgeNo">@T("admin.common.no")</label>
+    </div>
+</div>
+
+<div class="form-group">
+        <label>@T("vote.instore.lable.SawVip")</label>
+    <div class="radio-options">
+        <input type="radio" id="sawVipYes" name="SawVip" value="بله">
+            <label for="sawVipYes">@T("admin.common.yes")</label>
+        <input type="radio" id="sawVipNo" name="SawVip" value="خیر">
+            <label for="sawVipNo">@T("admin.common.no")</label>
+    </div>
+</div>
+
+
+    <button type="submit" class="btn btn-primary">ثبت</button>
+</form>
+<style>
+	body {
+		font-family: Arial, sans-serif;
+		direction: rtl;
+		background-color: #f9f9f9;
+		padding: 20px;
+	}
+
+	.vote-form {
+		max-width: 500px;
+		margin: 0 auto;
+		background-color: white;
+		padding: 20px;
+		border: 1px solid #ccc;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.form-group {
+		margin-bottom: 15px;
+	}
+
+	label {
+		font-size: 18px;
+	}
+
+	.form-control {
+		width: 100%;
+		font-size: 16px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin: 5px;
+	}
+
+	.form-control:focus {
+		border-color: #007BFF;
+		outline: none;
+	}
+
+	.radio-options {
+		display: flex;
+		justify-content: flex-start;
+		gap: 10px;
+	}
+
+	.radio-options label {
+		font-size: 16px;
+	}
+
+	.btn-primary {
+		padding: 12px 24px;
+		font-size: 18px;
+		font-weight: bold;
+		background-color: #007BFF;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.btn-primary:hover {
+		background-color: #0056b3;
+	}
+</style>

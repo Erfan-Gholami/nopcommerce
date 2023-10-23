@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "ContactForm",
+  "SystemName": "Widgets.ContactForm",
+  "Version": "1.02",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "Erfan",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.ContactForm.dll",
+  "Description": "my first plugin."
+}

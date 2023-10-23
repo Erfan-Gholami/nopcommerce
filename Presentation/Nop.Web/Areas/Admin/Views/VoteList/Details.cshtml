@@ -1,0 +1,180 @@
+﻿@model Nop.Web.Models.Vote.VoteItemModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Vote Results";
+    Html.AppendPageCssClassParts("html-Vote-page");
+}
+
+<h2>فرم نظرسنجی</h2>
+<button class="btn-print" onclick="printPage()">@T("order.print")</button>
+<button class="btn-print" onclick="backPage()">@T("admin.votelist.back")</button>
+
+
+<div class="container">
+    <div class="form-group">
+		<label for="name">@T("vote.instore.lable.name")</label>
+        <input id="name" class="form-control" value="@Model.Name" readonly />
+    </div>
+
+    <div class="form-group">
+		<label for="birthday">@T("vote.instore.lable.Birthday")</label>
+        <input id="birthday" type="text" class="form-control" value="@Model.Birthday.ToShortDateString()" readonly />
+    </div>
+
+    <div class="form-group">
+		<label for="mobile">@T("vote.instore.lable.Mobile")</label>
+        <input id="mobile" class="form-control" value="@Model.Mobile" readonly />
+    </div>
+
+    <div class="form-group">
+		<label for="email">@T("vote.instore.lable.Email")</label>
+        <input id="email" type="email" class="form-control" value="@Model.Email" readonly />
+    </div>
+
+    <div class="form-group">
+		<label for="tahsilat">@T("vote.instore.lable.Tahsilat")</label>
+        <input id="tahsilat" type="text" class="form-control" value="@Model.Tahsilat" readonly />
+    </div>
+
+    <div class="form-group">
+		<label>@T("vote.instore.lable.FoodQuality")</label>
+        <div class="radio-options">
+			<input type="radio" id="foodBad" name="FoodQuality" disabled value="@T("reviews.fields.rating.bad")" @(Model.FoodQuality == "بد" ? "checked" : "") />
+			<label for="foodBad">@T("reviews.fields.rating.bad")</label>
+			<input type="radio" id="foodNormal" name="FoodQuality" disabled value="@T("vote.instore.rate.typical")" @(Model.FoodQuality == "معمولی" ? "checked" : "") />
+			<label for="foodNormal">@T("vote.instore.rate.typical")</label>
+			<input type="radio" id="foodGood" name="FoodQuality" disabled value="@T("reviews.fields.rating.good")" @(Model.FoodQuality == "خوب" ? "checked" : "") />
+			<label for="foodGood">@T("reviews.fields.rating.good")</label>
+			<input type="radio" id="foodPerfect" name="FoodQuality" disabled value="@T("reviews.fields.rating.excellent")" @(Model.FoodQuality == "عالی" ? "checked" : "") />
+			<label for="foodPerfect">@T("reviews.fields.rating.excellent")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+		<label>@T("vote.instore.lable.StaffLook")</label>
+        <div class="radio-options">
+			<input type="radio" id="staffBad" name="StaffLook" disabled value="@T("reviews.fields.rating.bad")" @(Model.StaffLook == "بد" ? "checked" : "") />
+			<label for="foodBad">@T("reviews.fields.rating.bad")</label>
+
+			<input type="radio" id="staffGood" name="StaffLook" disabled value="@T("reviews.fields.rating.good")" @(Model.StaffLook == "خوب" ? "checked" : "") />
+			<label for="foodGood">@T("reviews.fields.rating.good")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+		<label>@T("vote.instore.lable.EnviromentPrettiness")</label>
+        <div class="radio-options">
+			<input type="radio" id="envBad" name="EnviromentPrettiness" disabled value="@T("reviews.fields.rating.bad")" @(Model.EnviromentPrettiness == "بد" ? "checked" : "") />
+			<label for="envBad">@T("reviews.fields.rating.bad")</label>
+			<input type="radio" id="envGood" name="EnviromentPrettiness" disabled value="@T("reviews.fields.rating.good")" @(Model.EnviromentPrettiness == "خوب" ? "checked" : "") />
+			<label for="envGood">@T("reviews.fields.rating.good")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+		<label for="whoIsGuest">@T("vote.instore.lable.WhoIsGuest")</label>
+        <input id="whoIsGuest" class="form-control" value="@Model.WhoIsGuest" readonly />
+    </div>
+
+    <div class="form-group">
+		<label for="critisize">@T("vote.instore.lable.Critisize")</label>
+        <textarea id="critisize" class="form-control" readonly>@Model.Critisize</textarea>
+    </div>
+
+    <div class="form-group">
+		<label for="howFindUs">@T("vote.instore.lable.HowFindUs")</label>
+        <input id="howFindUs" class="form-control" value="@Model.HowFindUs" readonly />
+    </div>
+
+    <div class="form-group">
+		<label>@T("vote.instore.lable.DrchiaKnowledge")</label>
+        <div class="radio-options">
+			<input type="radio" id="knowledgeYes" name="DrchiaKnowledge" disabled value="@T("admin.common.yes")" @(Model.DrchiaKnowledge == "بله" ? "checked" : "") />
+			<label for="knowledgeYes">@T("admin.common.yes")</label>
+			<input type="radio" id="knowledgeNo" name="DrchiaKnowledge" disabled value="@T("admin.common.no")" @(Model.DrchiaKnowledge == "خیر" ? "checked" : "") />
+			<label for="knowledgeNo">@T("admin.common.no")</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+		<label>@T("vote.instore.lable.SawVip")</label>
+        <div class="radio-options">
+			<input type="radio" id="sawVipYes" name="SawVip" disabled value="@T("admin.common.yes")" @(Model.SawVip == "بله" ? "checked" : "")>
+			<label for="sawVipYes">@T("admin.common.yes")</label>
+			<input type="radio" id="sawVipNo" name="SawVip" disabled value="@T("admin.common.no")" @(Model.SawVip == "خیر" ? "checked" : "")>
+			<label for="sawVipNo">@T("admin.common.no")</label>
+        </div>
+    </div>
+</div>
+
+<script>
+    function printPage() {
+        window.print();
+    }
+		function backPage() {
+			window.location.href = "@Url.Action("Index", "VoteList", new { area = "Admin" })";
+		}
+</script>
+
+<style>
+
+	.container {
+		font-family:  Arial, sans-serif;
+		direction: rtl;
+
+		max-width: 500px;
+		margin: 0 auto;
+		padding: 20px;
+		border: 1px solid #ccc;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.form-group {
+		margin-bottom: 15px;
+	}
+
+	label {
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	.form-control {
+		width: 100%;
+		padding: 10px;
+		font-size: 14px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
+
+	.form-control:focus {
+		border-color: #007BFF;
+		outline: none;
+	}
+
+	.radio-options {
+		display: flex;
+		justify-content: flex-start;
+		gap: 10px;
+	}
+
+	.radio-options label {
+		font-size: 14px;
+	}
+
+	.btn-print {
+		padding: 10px 20px;
+		font-size: 16px;
+		font-weight: bold;
+		background-color: #007BFF;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.btn-print:hover {
+		background-color: #0056b3;
+	}
+</style>

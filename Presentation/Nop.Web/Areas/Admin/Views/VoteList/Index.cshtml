@@ -1,0 +1,102 @@
+﻿@model IList<Nop.Web.Areas.Admin.Models.VoteList.VoteListItemModel>
+    
+
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	Html.AppendCssFileParts("~/lib/ionicons/css/ionicons-2.0.1.min.css");
+
+	ViewData["Title"] = "Vote Results";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+<h2 style="margin: 5px">نتایج نظرسنجی</h2>
+
+<div class="table-responsive vlist">
+	<table id="voteTable" class="table table-bordered table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>نام و نام خانوادگی</th>
+			<th>تاریخ تولد</th>
+			<th>شماره تماس</th>
+			<th>ایمیل</th>
+			<th>میزان تحصیلات</th>
+			<th>کیفیت غذا</th>
+			<th>آراستگی پرسنل</th>
+			<th>زیبایی محیط</th>
+			<th>مهمان بعدی</th>
+			<th>اطلاع از دکتر چیا</th>
+			<th>دیدار بخش وی آی پی</th>
+			<th>انتقاد یا پیشنهاد</th>
+			<th>نحوه ی آشنایی با ما</th>
+			<th>عملیات</th>
+		</tr>
+		</thead>
+		<tbody>
+		@foreach (var vote in Model)
+		{
+			<tr>
+				<td>@vote.Name</td>
+				<td>@vote.Birthday.Date.ToShortDateString()</td>
+				<td>@vote.Mobile</td>
+				<td>@vote.Email</td>
+				<td>@vote.Tahsilat</td>
+				<td>@vote.FoodQuality</td>
+				<td>@vote.StaffLook</td>
+				<td>@vote.EnviromentPrettiness</td>
+				<td>@vote.WhoIsGuest</td>
+				<td>@vote.DrchiaKnowledge</td>
+				<td>@vote.SawVip</td>
+				<td>@vote.Critisize</td>
+				<td>@vote.HowFindUs</td>
+				<td>
+					<a asp-action="Details" asp-route-id="@vote.Id" class="btn btn-primary">جزئیات</a>
+				</td>
+			</tr>
+		}
+		</tbody>
+	</table>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('#voteTable').DataTable();
+	});
+</script>
+
+<style>
+	.vlist h2 {
+		font-family: tahoma;
+		text-align: center;
+
+	}
+	/* Add styles for better UX */
+	.table-responsive {
+		margin-bottom: 20px;
+		overflow-x: auto;
+		min-height: .01%;
+		overflow-y: hidden;
+	}
+
+	.table {
+		width: 100%;
+		direction: rtl;
+		max-width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.table th, .table td {
+		padding: 12px 15px;
+		vertical-align: top;
+		text-align: center;
+		vertical-align: middle !important;
+		border-top: 1px solid #dee2e6;
+	}
+
+	.thead-dark th {
+		color: #fff;
+		background-color: #343a40;
+		border-color: #454d55;
+	}
+</style>

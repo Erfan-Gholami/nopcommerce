@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "CForm",
+  "SystemName": "Widgets.CForm",
+  "Version": "1.02",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "Erfan",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.CForm.dll",
+  "Description": "my first plugin."
+}
